@@ -61,33 +61,6 @@
     </div>
 </section>
 
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Paket Hemat</h2>
-            <div class="mx-auto mt-2" style="width: 50px; height: 3px; background-color: var(--accent);"></div>
-        </div>
-        <div class="row g-4 justify-content-center">
-            @forelse($pakets as $paket)
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm text-center">
-                    <div class="card-body p-4">
-                        <h4 class="card-title fw-bold text-primary mb-3">{{ $paket->nama_paket }}</h4>
-                        <h2 class="display-6 fw-bold mb-3">Rp {{ number_format($paket->harga, 0, ',', '.') }}</h2>
-                        <p class="text-muted">{{ $paket->deskripsi }}</p>
-                        @if($paket->min_berat)
-                        <div class="badge bg-secondary mb-3">Min. Berat: {{ $paket->min_berat }} Kg</div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            @empty
-            <div class="col-12 text-center text-muted">Belum ada paket tersedia.</div>
-            @endforelse
-        </div>
-    </div>
-</section>
-
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">

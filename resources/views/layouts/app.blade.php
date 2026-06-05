@@ -141,10 +141,6 @@
            class="nav-link {{ request()->routeIs('admin.layanan.*') ? 'active' : '' }}">
             <i class="fas fa-tshirt"></i> Layanan
         </a>
-        <a href="{{ route('admin.paket.index') }}"
-           class="nav-link {{ request()->routeIs('admin.paket.*') ? 'active' : '' }}">
-            <i class="fas fa-box-open"></i> Paket
-        </a>
         <a href="{{ route('admin.pelanggan.index') }}"
            class="nav-link {{ request()->routeIs('admin.pelanggan.*') ? 'active' : '' }}">
             <i class="fas fa-users"></i> Pelanggan

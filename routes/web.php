@@ -5,7 +5,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\LayananController;
-use App\Http\Controllers\Admin\PaketController;
 use App\Http\Controllers\Admin\PelangganController;
 use App\Http\Controllers\Admin\TransaksiController;
 use App\Http\Controllers\Admin\PegawaiController;
@@ -34,9 +33,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(f
 
     // Layanan
     Route::resource('layanan', LayananController::class);
-
-    // Paket
-    Route::resource('paket', PaketController::class);
 
     // Pelanggan
     Route::get('pelanggan/cetak-semua',       [PelangganController::class, 'cetakSemua'])->name('pelanggan.cetak-semua');
