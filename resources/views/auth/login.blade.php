@@ -39,14 +39,14 @@
                 <label class="form-label text-muted small fw-bold">Alamat Email</label>
                 <div class="input-group">
                     <span class="input-group-text bg-light border-end-0"><i class="fas fa-envelope text-muted"></i></span>
-                    <input type="email" name="email" class="form-control border-start-0 ps-0" placeholder="admin@silaundry.com" value="{{ old('email') }}" required autofocus>
+                    <input type="email" name="email" class="form-control border-start-0 ps-0" placeholder="Masukkan alamat email Anda" value="{{ old('email') }}" required autofocus>
                 </div>
             </div>
             <div class="mb-4">
                 <label class="form-label text-muted small fw-bold">Kata Sandi</label>
                 <div class="input-group">
                     <span class="input-group-text bg-light border-end-0"><i class="fas fa-lock text-muted"></i></span>
-                    <input type="password" name="password" class="form-control border-start-0 ps-0" placeholder="••••••••" required>
+                    <input type="password" name="password" class="form-control border-start-0 ps-0" placeholder="Masukkan kata sandi Anda" required>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
