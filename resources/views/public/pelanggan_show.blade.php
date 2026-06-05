@@ -14,9 +14,24 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-white border-bottom-0 pt-3 pb-0 d-flex justify-content-between align-items-center">
                     <span class="fw-bold text-primary">{{ $transaksi->no_order }}</span>
-                    <span class="badge badge-{{ $transaksi->status }} px-2 py-1">{{ strtoupper($transaksi->status) }}</span>
+                    @php
+                        $statusClass = 'secondary';
+                        $statusText = 'Menunggu Diproses';
+                        
+                        if ($transaksi->status == 'diterima') { $statusClass = 'secondary'; $statusText = 'Menunggu Diproses'; }
+                        elseif ($transaksi->status == 'dicuci') { $statusClass = 'info'; $statusText = 'Sedang Dicuci'; }
+                        elseif ($transaksi->status == 'dijemur') { $statusClass = 'warning'; $statusText = 'Sedang Dijemur'; }
+                        elseif ($transaksi->status == 'disetrika') { $statusClass = 'warning'; $statusText = 'Sedang Disetrika'; }
+                        elseif ($transaksi->status == 'siap') { $statusClass = 'success'; $statusText = 'Selesai, Siap Diambil'; }
+                        elseif ($transaksi->status == 'diambil') { $statusClass = 'primary'; $statusText = 'Sudah Diambil'; }
+                        elseif ($transaksi->status == 'batal') { $statusClass = 'danger'; $statusText = 'Dibatalkan'; }
+                    @endphp
+                    <span class="badge bg-{{ $statusClass }} px-2 py-1">{{ $statusText }}</span>
                 </div>
                 <div class="card-body">
+                    <div class="alert alert-{{ $statusClass == 'secondary' ? 'light border' : $statusClass }} bg-opacity-10 py-2 mb-3 text-center">
+                        <i class="fas fa-info-circle me-1"></i> <span class="fw-semibold">{{ $statusText }}</span>
+                    </div>
                     <div class="mb-3 small">
                         <div class="d-flex justify-content-between mb-1">
                             <span class="text-muted">Tgl Masuk:</span>
