@@ -18,9 +18,11 @@
                     <small>Dibuat pada: {{ \Carbon\Carbon::parse($transaksi->created_at)->format('d M Y, H:i') }}</small>
                 </div>
                 <div>
+                    @if($transaksi->status !== 'batal')
                     <a href="{{ route('admin.transaksi.nota', $transaksi) }}" target="_blank" class="btn btn-light btn-sm text-dark fw-bold shadow-sm">
                         <i class="fas fa-print me-1"></i> Cetak Nota
                     </a>
+                    @endif
                 </div>
             </div>
         </div>

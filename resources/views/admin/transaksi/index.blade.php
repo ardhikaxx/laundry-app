@@ -50,9 +50,11 @@
                             <a href="{{ route('admin.transaksi.show', $transaksi) }}" class="btn btn-info btn-sm text-white" title="Detail / Kelola">
                                 <i class="fas fa-cog"></i>
                             </a>
+                            @if($transaksi->status !== 'batal')
                             <a href="{{ route('admin.transaksi.nota', $transaksi) }}" target="_blank" class="btn btn-secondary btn-sm" title="Cetak Nota">
                                 <i class="fas fa-print"></i>
                             </a>
+                            @endif
                         </td>
                     </tr>
                     @empty

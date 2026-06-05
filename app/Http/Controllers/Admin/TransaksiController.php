@@ -187,6 +187,10 @@ class TransaksiController extends Controller
 
     public function nota(Transaksi $transaksi)
     {
+        if ($transaksi->status === 'batal') {
+            return redirect()->back()->with('error', 'Nota tidak dapat dicetak karena transaksi telah dibatalkan.');
+        }
+
         $transaksi->load(['pelanggan', 'pegawai', 'detail']);
         $pdf = Pdf::loadView('pdf.transaksi', compact('transaksi'))
                    ->setPaper('a4', 'portrait');
