@@ -207,12 +207,35 @@
                             <label class="form-label small fw-bold text-muted">Input Pembayaran</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="number" name="bayar" class="form-control" value="{{ $transaksi->total }}" min="{{ $transaksi->total }}" required>
+                                <input type="number" name="bayar" id="inputBayar" class="form-control" value="{{ $transaksi->total }}" min="{{ $transaksi->total }}" required>
                             </div>
                             <small class="text-muted mt-1 d-block">Minimal Rp {{ number_format($transaksi->total, 0, ',', '.') }}</small>
+                            <div class="mt-2 fw-bold text-success d-none" id="kembalianInfo">
+                                Kembalian: Rp <span id="kembalianNominal">0</span>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-success w-100 fw-bold"><i class="fas fa-check me-2"></i>Proses Pembayaran</button>
                     </form>
+                    
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const inputBayar = document.getElementById('inputBayar');
+                            const kembalianInfo = document.getElementById('kembalianInfo');
+                            const kembalianNominal = document.getElementById('kembalianNominal');
+                            const totalTagihan = {{ $transaksi->total }};
+
+                            inputBayar.addEventListener('input', function() {
+                                const bayar = parseFloat(this.value) || 0;
+                                if (bayar > totalTagihan) {
+                                    const kembalian = bayar - totalTagihan;
+                                    kembalianNominal.innerText = new Intl.NumberFormat('id-ID').format(kembalian);
+                                    kembalianInfo.classList.remove('d-none');
+                                } else {
+                                    kembalianInfo.classList.add('d-none');
+                                }
+                            });
+                        });
+                    </script>
                     @endif
                 @endif
             </div>

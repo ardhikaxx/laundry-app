@@ -72,6 +72,12 @@
             <td colspan="4" class="text-right">Telah Dibayar ({{ strtoupper($transaksi->metode_bayar) }}):</td>
             <td class="text-right">Rp {{ number_format($transaksi->bayar ?? 0, 0, ',', '.') }}</td>
         </tr>
+        @if($transaksi->kembalian > 0)
+        <tr>
+            <td colspan="4" class="text-right">Kembalian:</td>
+            <td class="text-right">Rp {{ number_format($transaksi->kembalian, 0, ',', '.') }}</td>
+        </tr>
+        @endif
         <tr>
             <td colspan="4" class="text-right"><strong>Status Pembayaran:</strong></td>
             <td class="text-right">
