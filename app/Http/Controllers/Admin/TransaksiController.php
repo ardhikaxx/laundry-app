@@ -127,10 +127,9 @@ class TransaksiController extends Controller
             } elseif ($newStatus === 'diambil') {
                 $transaksi->tanggal_ambil = now();
                 
-                // Tambah poin dan total transaksi
+                // Tambah total transaksi
                 $pelanggan = $transaksi->pelanggan;
                 $pelanggan->total_transaksi += 1;
-                $pelanggan->poin += floor($transaksi->total / 10000);
                 $pelanggan->save();
             }
 

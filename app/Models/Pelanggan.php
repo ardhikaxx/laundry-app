@@ -16,7 +16,6 @@ class Pelanggan extends Model
         'email',
         'alamat',
         'tanggal_daftar',
-        'poin',
         'total_transaksi',
         'catatan',
         'is_active'

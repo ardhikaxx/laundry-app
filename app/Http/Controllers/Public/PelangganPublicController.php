@@ -11,14 +11,24 @@ class PelangganPublicController extends Controller
     public function index(Request $request)
     {
         $cari = $request->cari;
+        $pelanggans = collect();
         
-        $pelanggans = Pelanggan::aktif()
-            ->when($cari, function($query, $cari) {
-                return $query->where('nama_pelanggan', 'like', "%{$cari}%")
-                             ->orWhere('kode_pelanggan', 'like', "%{$cari}%");
-            })
-            ->paginate(10);
+        if ($cari) {
+            $pelanggans = Pelanggan::aktif()
+                ->where('nama_pelanggan', 'like', "%{$cari}%")
+                ->orWhere('kode_pelanggan', 'like', "%{$cari}%")
+                ->orWhere('no_telepon', 'like', "%{$cari}%")
+                ->get();
+        }
 
         return view('public.pelanggan', compact('pelanggans', 'cari'));
+    }
+
+    public function show($kode_pelanggan)
+    {
+        $pelanggan = Pelanggan::aktif()->where('kode_pelanggan', $kode_pelanggan)->firstOrFail();
+        $transaksis = $pelanggan->transaksi()->with('detail')->latest()->get();
+        
+        return view('public.pelanggan_show', compact('pelanggan', 'transaksis'));
     }
 }

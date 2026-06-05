@@ -1,64 +1,64 @@
 @extends('layouts.public')
-@section('title', 'Pelanggan')
+@section('title', 'Cek Status Cucian')
 
 @section('content')
-<div class="bg-primary text-white py-4 mb-5">
+<div class="bg-primary text-white py-5 mb-5 text-center">
     <div class="container">
-        <h2 class="fw-bold mb-0">Daftar Pelanggan</h2>
-        <p class="mb-0 text-white-50">Cek status membership dan total poin transaksi Anda.</p>
+        <h2 class="fw-bold mb-3">Cek Status Cucian Anda</h2>
+        <p class="mb-4 text-white-50">Masukkan Nama, Kode Pelanggan, atau Nomor Telepon Anda untuk melacak cucian.</p>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="{{ route('public.pelanggan') }}" method="GET" class="d-flex shadow-sm rounded">
+                    <input type="text" name="cari" class="form-control form-control-lg border-0" placeholder="Contoh: PLG-2026... atau 0812..." value="{{ request('cari') }}" required>
+                    <button type="submit" class="btn btn-dark px-4"><i class="fas fa-search me-2"></i>Cari</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="container mb-5">
-    <div class="card border-0 shadow-sm">
-        <div class="card-header bg-white p-3">
-            <form action="{{ route('public.pelanggan') }}" method="GET" class="d-flex w-100 w-md-50 ms-auto gap-2">
-                <input type="text" name="cari" class="form-control" placeholder="Cari nama atau kode pelanggan..." value="{{ request('cari') }}">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
-                @if(request('cari'))
-                <a href="{{ route('public.pelanggan') }}" class="btn btn-outline-secondary"><i class="fas fa-times"></i></a>
-                @endif
-            </form>
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover table-striped mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="px-4">Kode Pelanggan</th>
-                            <th>Nama</th>
-                            <th>L/P</th>
-                            <th>No. Telepon</th>
-                            <th>Tgl Daftar</th>
-                            <th class="text-center">Total Transaksi</th>
-                            <th class="text-center">Poin</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($pelanggans as $pelanggan)
-                        <tr>
-                            <td class="px-4 fw-semibold text-primary">{{ $pelanggan->kode_pelanggan }}</td>
-                            <td>{{ $pelanggan->nama_pelanggan }}</td>
-                            <td>{{ $pelanggan->jenis_kelamin }}</td>
-                            <td>{{ substr($pelanggan->no_telepon, 0, 4) . '****' . substr($pelanggan->no_telepon, -3) }}</td>
-                            <td>{{ \Carbon\Carbon::parse($pelanggan->tanggal_daftar)->format('d/m/Y') }}</td>
-                            <td class="text-center"><span class="badge bg-secondary">{{ $pelanggan->total_transaksi }}</span></td>
-                            <td class="text-center"><span class="badge bg-warning text-dark"><i class="fas fa-star me-1"></i>{{ $pelanggan->poin }}</span></td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="7" class="text-center py-4 text-muted">Data pelanggan tidak ditemukan.</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+<div class="container mb-5" style="min-height: 40vh;">
+    @if(request('cari'))
+        @if($pelanggans->count() > 0)
+            <div class="row justify-content-center g-4">
+                @foreach($pelanggans as $pelanggan)
+                <div class="col-md-6 col-lg-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="bg-primary bg-opacity-10 text-primary d-inline-flex justify-content-center align-items-center rounded-circle mb-3" style="width: 70px; height: 70px; font-size: 2rem;">
+                                {{ substr($pelanggan->nama_pelanggan, 0, 1) }}
+                            </div>
+                            <h4 class="fw-bold mb-1">{{ $pelanggan->nama_pelanggan }}</h4>
+                            <p class="text-muted mb-3">{{ $pelanggan->kode_pelanggan }}</p>
+                            
+                            <ul class="list-unstyled text-start mb-4 bg-light p-3 rounded small">
+                                <li class="mb-2"><i class="fas fa-phone text-muted me-2"></i> {{ substr($pelanggan->no_telepon, 0, 4) . '****' . substr($pelanggan->no_telepon, -3) }}</li>
+                                <li class="mb-2"><i class="fas fa-calendar-alt text-muted me-2"></i> Terdaftar: {{ \Carbon\Carbon::parse($pelanggan->tanggal_daftar)->format('d M Y') }}</li>
+                                <li><i class="fas fa-shopping-bag text-muted me-2"></i> Total Transaksi: <span class="badge bg-primary">{{ $pelanggan->total_transaksi }}x</span></li>
+                            </ul>
+                            
+                            <a href="{{ route('public.pelanggan.show', $pelanggan->kode_pelanggan) }}" class="btn btn-primary w-100 fw-bold">
+                                <i class="fas fa-list me-2"></i>Lihat Cucian Saya
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
-        </div>
-        @if($pelanggans->hasPages())
-        <div class="card-footer bg-white pt-3 pb-1">
-            {{ $pelanggans->links('pagination::bootstrap-5') }}
-        </div>
+        @else
+            <div class="text-center py-5">
+                <i class="fas fa-search-minus fs-1 text-muted mb-3"></i>
+                <h4 class="text-muted">Data Pelanggan Tidak Ditemukan</h4>
+                <p class="text-muted">Pastikan data pencarian yang Anda masukkan benar.</p>
+                <a href="{{ route('public.pelanggan') }}" class="btn btn-outline-secondary mt-2">Reset Pencarian</a>
+            </div>
         @endif
-    </div>
+    @else
+        <div class="text-center py-5">
+            <i class="fas fa-tshirt fs-1 text-muted opacity-25 mb-4" style="font-size: 5rem !important;"></i>
+            <h5 class="text-muted">Silakan lakukan pencarian untuk melacak status cucian Anda.</h5>
+        </div>
+    @endif
 </div>
 @endsection

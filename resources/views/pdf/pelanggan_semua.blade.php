@@ -9,12 +9,11 @@
         <tr>
             <th class="text-center" style="width: 5%;">No</th>
             <th style="width: 15%;">Kode</th>
-            <th style="width: 25%;">Nama Pelanggan</th>
+            <th style="width: 30%;">Nama Pelanggan</th>
             <th class="text-center" style="width: 5%;">L/P</th>
-            <th style="width: 15%;">No. Telepon</th>
+            <th style="width: 20%;">No. Telepon</th>
             <th style="width: 15%;">Tgl. Daftar</th>
             <th class="text-center" style="width: 10%;">Trx</th>
-            <th class="text-center" style="width: 10%;">Poin</th>
         </tr>
     </thead>
     <tbody>
@@ -27,10 +26,9 @@
             <td>{{ $p->no_telepon }}</td>
             <td>{{ \Carbon\Carbon::parse($p->tanggal_daftar)->format('d/m/Y') }}</td>
             <td class="text-center">{{ $p->total_transaksi }}</td>
-            <td class="text-center text-warning fw-bold">{{ $p->poin }}</td>
         </tr>
         @empty
-        <tr><td colspan="8" class="text-center text-muted" style="padding: 20px;">Tidak ada data pelanggan</td></tr>
+        <tr><td colspan="7" class="text-center text-muted" style="padding: 20px;">Tidak ada data pelanggan</td></tr>
         @endforelse
     </tbody>
 </table>

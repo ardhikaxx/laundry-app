@@ -35,10 +35,6 @@
                         <span class="text-muted"><i class="fas fa-calendar-alt me-2"></i>Tgl Daftar</span>
                         <span class="fw-semibold">{{ \Carbon\Carbon::parse($pelanggan->tanggal_daftar)->format('d/m/Y') }}</span>
                     </li>
-                    <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
-                        <span class="text-muted"><i class="fas fa-star text-warning me-2"></i>Poin Reward</span>
-                        <span class="fw-bold text-warning">{{ $pelanggan->poin }}</span>
-                    </li>
                 </ul>
                 <div class="mt-4 text-center">
                     <a href="{{ route('admin.pelanggan.cetak', $pelanggan) }}" target="_blank" class="btn btn-outline-primary w-100 mb-2">

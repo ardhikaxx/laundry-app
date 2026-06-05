@@ -17,6 +17,7 @@ use App\Http\Controllers\Public\PelangganPublicController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/layanan',  [LayananPublicController::class, 'index'])->name('public.layanan');
 Route::get('/pelanggan',[PelangganPublicController::class, 'index'])->name('public.pelanggan');
+Route::get('/pelanggan/{kode_pelanggan}',[PelangganPublicController::class, 'show'])->name('public.pelanggan.show');
 
 // ─── Auth ────────────────────────────────────────────────────────────
 Route::get('/login',  [LoginController::class, 'showForm'])->name('login');

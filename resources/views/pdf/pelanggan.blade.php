@@ -44,19 +44,11 @@
         <td style="width: 5%; border: none;"></td>
         <td style="width: 35%; vertical-align: top; border: none; padding: 0;">
             <div style="background-color: #f1f5f9; border: 1px solid #0d6efd; padding: 20px; border-radius: 4px; text-align: center;">
-                <h4 style="margin-top: 0; color: #0d6efd; font-size: 14px;">Poin Reward</h4>
-                <div style="font-size: 48px; font-weight: bold; color: #ffc107; margin: 15px 0;">
-                    {{ $pelanggan->poin }}
-                </div>
-                <p style="font-size: 10px; color: #6c757d; margin: 0;">Total poin yang terkumpul.</p>
-                <p style="font-size: 10px; color: #6c757d; margin-top: 5px;">Poin dapat ditukar dengan potongan harga atau layanan gratis.</p>
-                
-                <hr style="border-top: 1px solid #dee2e6; margin: 15px 0;">
-                
                 <h5 style="margin: 0; color: #333;">Total Transaksi</h5>
-                <div style="font-size: 24px; font-weight: bold; color: #0d6efd; margin-top: 5px;">
+                <div style="font-size: 48px; font-weight: bold; color: #0d6efd; margin: 15px 0;">
                     {{ $pelanggan->total_transaksi }}x
                 </div>
+                <p style="font-size: 10px; color: #6c757d; margin: 0;">Total transaksi sukses yang pernah dilakukan.</p>
             </div>
         </td>
     </tr>
