@@ -22,6 +22,7 @@ class PelangganRequest extends FormRequest
             'alamat'         => ['required', 'string', 'max:500'],
             'tanggal_daftar' => ['required', 'date', 'before_or_equal:today'],
             'catatan'        => ['nullable', 'string', 'max:1000'],
+            'is_active'      => ['nullable', 'boolean'],
         ];
     }
 
